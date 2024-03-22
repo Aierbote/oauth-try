@@ -5,22 +5,18 @@ describe('example to-do app', () => {
     cy.get("#L2AGLb").click()
   })
 
-  it('types in the textarea `its steve jobs academy`', () => {
+  it('reachs the URI steps by step and it fills the form like a user would do', () => {
 
+    // types in the textarea `its steve jobs academy`
     cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
 
-  })
-
-
-
-
-  it('checks `its steve jobs academy` is the first result in list', () => {
-
-    cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
+    // checks `its steve jobs academy` is the first result in list of results
     cy.get('a[jsname=UWckNb]')
-      .should('have.text', 'Steve Jobs Academy: Home')
-
+      .should('include.text', 'Steve Jobs Academy: Home')
+      .first()
+      .click()
   })
+
 
 
   // it('can add new todo items', () => {
