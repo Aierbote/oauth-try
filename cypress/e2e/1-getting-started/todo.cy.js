@@ -15,6 +15,19 @@ describe('example to-do app', () => {
       .should('include.text', 'Steve Jobs Academy: Home')
       .first()
       .click()
+
+    // finds the element Corsi in navbar and trigger mouseover
+    cy.get('a[href="https://stevejobs.academy/corsi/"]').should("have.text", "Corsi")
+    cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
+      .trigger('mouseover')
+
+    // finds the element `Web & Mobile Development` in dropdown and click
+    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
+      .should("have.text", "Web & Mobile Development")
+      .should("be.visible")
+      .click()
+
+
   })
 
 
