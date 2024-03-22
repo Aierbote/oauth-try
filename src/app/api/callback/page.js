@@ -1,10 +1,11 @@
-// import { useRouter } from "next/router";
+import Profile from "@/app/profile/page";
 
 
 export default async function Callback(request, response) {
   console.log({ request, response });
 
   const code = request.searchParams.code;
+  let access_token = null;
 
   // DEBUG :
   console.log("code", code);
@@ -23,8 +24,13 @@ export default async function Callback(request, response) {
     });
     const data = await response.json();
     console.log(data);
+    access_token = data.access_token
   } catch (error) {
     console.error('Error:', error);
+  }
+  finally {
+    return <Profile access_token={access_token} />;
+
   }
 
 }
