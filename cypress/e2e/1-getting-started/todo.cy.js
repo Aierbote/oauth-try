@@ -6,18 +6,22 @@ describe('example to-do app', () => {
   })
 
   it('types in the textarea `its steve jobs academy`', () => {
-    // We use the `cy.get()` command to get all elements that match the selector.
-    // Then, we use `should` to assert that there are two matched items,
-    // which are the two default items.
-    cy.get('.gLFyf').type(`its steve jobs academy{enter}`)
 
-    // // We can go even further and check that the default todos each contain
-    // // the correct text. We use the `first` and `last` functions
-    // // to get just the first and last matched elements individually,
-    // // and then perform an assertion with `should`.
-    // cy.get('.todo-list li').first().should('have.text', 'Pay electric bill')
-    // cy.get('.todo-list li').last().should('have.text', 'Walk the dog')
+    cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
+
   })
+
+
+
+
+  it('checks `its steve jobs academy` is the first result in list', () => {
+
+    cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
+    cy.get('a[jsname=UWckNb]')
+      .should('have.text', 'Steve Jobs Academy: Home')
+
+  })
+
 
   // it('can add new todo items', () => {
   //   // We'll store our item text in a variable so we can reuse it
