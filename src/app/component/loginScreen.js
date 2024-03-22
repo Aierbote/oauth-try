@@ -16,7 +16,7 @@ export const LoginScreen = () => {
         Welcome to <em>OAuth Try</em>
       </h1>
 
-      <button onClick={loginToGitHub} >Login on GitHub</button >
+      <button onClick={loginToGitHub} data-cy="test-login-click" >Login on GitHub</button >
     </>
   )
 }
