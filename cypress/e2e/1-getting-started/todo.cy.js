@@ -86,6 +86,8 @@ describe('navigate to course and fill the form, step by step',
       cy.get('select[name="select-awareness"]')
         .select('Me ne ha parlato un amico/parente', { force: true })
 
+      // selects the `Corso`
+      cy.get('input[type="search"]').type(`WEB & MOBILE DEVELOPMENT - Palermo{enter}`)
 
     })
 
