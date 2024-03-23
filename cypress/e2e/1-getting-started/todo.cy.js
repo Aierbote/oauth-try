@@ -10,7 +10,7 @@ describe('example to-do app', () => {
     //   console.log(cy.get("#L2AGLb"))
     // }
 
-    cy.get("#L2AGLb")
+    cy.get("#L2AGLb", { timeout: 1000 })
       // .should('be.visible')
       .click({ force: true })
 
@@ -18,10 +18,10 @@ describe('example to-do app', () => {
     cy.clearCookies()
 
     // types in the textarea `its steve jobs academy`
-    cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
+    cy.get('textarea#APjFqb', { timeout: 1000 }).type(`its steve jobs academy{enter}`)
 
     // checks `its steve jobs academy` is the first result in list of results
-    cy.get('a[jsname=UWckNb]')
+    cy.get('a[jsname=UWckNb]', { timeout: 1000 })
       .should('include.text', 'Steve Jobs Academy: Home')
       .first()
       .click({ force: true })
@@ -29,13 +29,13 @@ describe('example to-do app', () => {
     // to navigate in a new page different from `google.com`
     cy.origin('https://stevejobs.academy', () => {
       // finds the element Corsi in navbar and trigger mouseover
-      cy.get('a[href="https://stevejobs.academy/corsi/"]')
+      cy.get('a[href="https://stevejobs.academy/corsi/"]', { timeout: 1000 })
         .should("include.text", "Corsi")
-      cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
+      cy.get('a[href="https://stevejobs.academy/corsi/"]:parent', { timeout: 1000 })
         .trigger('mouseover')
 
       // finds the element `Web & Mobile Development` in dropdown and click
-      cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
+      cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]', { timeout: 1000 })
         .should("have.text", "Web & Mobile Development")
         .should("be.visible")
         .click()
@@ -46,7 +46,7 @@ describe('example to-do app', () => {
       // waiting for the page to load (IDEA form may not be visible)
       cy.wait(1000)
 
-      cy.get('input[placeholder="Nome e cognome"]')
+      cy.get('input[placeholder="Nome e cognome"]', { timeout: 1000 })
         .type("John Doe")
 
     })
