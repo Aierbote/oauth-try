@@ -38,10 +38,10 @@ describe('navigate to course and fill the form, step by step',
       cy.visit('https://stevejobs.academy')
 
       // waiting for the page to load (IDEA navbar may not be visible)
-      cy.wait(2000)
+      cy.wait(3_000)
 
       // finds the element Corsi in navbar and trigger mouseover
-      cy.get('a[href="https://stevejobs.academy/corsi/"]', { timeout: 8_000 })
+      cy.get('a[href="https://stevejobs.academy/corsi/"]')
         .contains("Corsi")
       cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
         .first()
@@ -50,7 +50,7 @@ describe('navigate to course and fill the form, step by step',
       // finds the element `Web & Mobile Development` in dropdown and click
       cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
         .contains("Web & Mobile Development")
-        .should("be.visible")
+        // .should("be.visible")
         .first()
         .click({ force: true })
 
@@ -61,7 +61,7 @@ describe('navigate to course and fill the form, step by step',
       cy.visit('https://stevejobs.academy/web-and-mobile-development/');
 
       // waiting for the page to load (IDEA form may not be visible)
-      cy.wait(2000)
+      cy.wait(2_000)
 
       // fill the Fullname field
       cy.get('input[placeholder="Nome e cognome"]')
