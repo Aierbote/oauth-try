@@ -1,5 +1,9 @@
 
 describe('example to-do app', () => {
+  beforeEach(() => {
+    cy.viewport(1920, 1080)
+  })
+
 
   it('finds `its steve jobs academy` as the first google result', () => {
 
