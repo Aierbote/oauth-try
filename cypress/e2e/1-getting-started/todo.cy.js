@@ -67,6 +67,22 @@ describe('navigate to course and fill the form, step by step',
       cy.get('input[placeholder="Nome e cognome"]')
         .type("John Doe")
 
+      // TODO : selects the age range
+
+      // TODO : selects the `Titolo di Studio`
+
+      // fills the email field
+      cy.get('input[placeholder="Email"]')
+        .type("ciao@bonjour.it")
+
+      // fills the phone field
+      cy.get('input[placeholder="Telefono"]')
+        .type("1234512345")
+
+      // TODO : selects the `Come ci hai conosciuto?`
+
+      // TODO : selects the `Corso`
+
     })
 
 
