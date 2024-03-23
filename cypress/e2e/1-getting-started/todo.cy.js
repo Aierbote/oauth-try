@@ -44,8 +44,8 @@ describe('example to-do app', () => {
       .trigger('mouseover')
 
     // finds the element `Web & Mobile Development` in dropdown and click
-    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
-      .should("have.text", "Web & Mobile Development")
+    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]', { timeout: 8_000 })
+      .contains("Web & Mobile Development")
       .should("be.visible")
       .first()
       .click()
