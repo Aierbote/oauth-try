@@ -67,9 +67,12 @@ describe('navigate to course and fill the form, step by step',
       cy.get('input[placeholder="Nome e cognome"]')
         .type("John Doe")
 
-      // TODO : selects the age range
+      // selects the age range
+      cy.get('select[name="age"]').select('31+', { force: true })
 
-      // TODO : selects the `Titolo di Studio`
+      // selects the `Titolo di Studio`
+      cy.get('select[name="select-studio"]')
+        .select('Liceo scientifico', { force: true })
 
       // fills the email field
       cy.get('input[placeholder="Email"]')
@@ -79,9 +82,10 @@ describe('navigate to course and fill the form, step by step',
       cy.get('input[placeholder="Telefono"]')
         .type("1234512345")
 
-      // TODO : selects the `Come ci hai conosciuto?`
+      // selects the `Come ci hai conosciuto?`
+      cy.get('select[name="select-awareness"]')
+        .select('Me ne ha parlato un amico/parente', { force: true })
 
-      // TODO : selects the `Corso`
 
     })
 
