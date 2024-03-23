@@ -91,6 +91,9 @@ describe('navigate to course and fill the form, step by step',
 
       // ticks the `I read Privacy Policy` checkbox
       cy.get('[name="acceptance-privacy"]').check({ force: true })
+
+      // checks if the submit button is active
+      cy.get('input[type="submit"]').should('not.be.disabled')
     })
 
 
