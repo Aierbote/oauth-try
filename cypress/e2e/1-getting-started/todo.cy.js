@@ -6,16 +6,9 @@ describe('navigate to course and fill the form, step by step',
     viewportHeight: 1080,
   },
   () => {
-
-    it('finds `its steve jobs academy` as the first google result', () => {
+    beforeEach(() => {
 
       cy.visit('https://www.google.com/')
-
-      // if (cy.get("#L2AGLb").length > 0) {
-      //   console.log('cookie banner still exists')
-      //   console.log(cy.get("#L2AGLb"))
-      // }
-
       cy.get("#L2AGLb")
         // .should('be.visible')
         .click({ force: true })
@@ -31,69 +24,72 @@ describe('navigate to course and fill the form, step by step',
         .should('include.text', 'Steve Jobs Academy: Home')
         .first()
         .click({ force: true })
-    })
-
-    it('opens the page `Web & Mobile Development` course page ', () => {
-
-      cy.visit('https://stevejobs.academy')
-
-      // waiting for the page to load (IDEA navbar may not be visible)
-      cy.wait(3_000)
-
-      // finds the element Corsi in navbar and trigger mouseover
-      cy.get('a[href="https://stevejobs.academy/corsi/"]')
-        .contains("Corsi")
-      cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
-        .first()
-        .trigger('mouseover')
-
-      // finds the element `Web & Mobile Development` in dropdown and click
-      cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
-        .contains("Web & Mobile Development")
-        // .should("be.visible")
-        .first()
-        .click({ force: true })
 
     })
 
-    it('fills the form on the `Web & Mobile Development` course page', () => {
+    it('One Test To Rule Them All', () => {
 
-      cy.visit('https://stevejobs.academy/web-and-mobile-development/');
+      // opens the page `Web & Mobile Development` course page as new superdomain
+      cy.origin('https://stevejobs.academy', () => {
 
-      // waiting for the page to load (IDEA form may not be visible)
-      cy.wait(2_000)
+        // waiting for the page to load (IDEA navbar may not be visible)
+        cy.wait(3_000)
 
-      // fill the Fullname field
-      cy.get('input[placeholder="Nome e cognome"]')
-        .type("John Doe")
+        // // finds the element Corsi in navbar and trigger mouseover
+        // cy.get('a[href="https://stevejobs.academy/corsi/"]')
+        //   .contains("Corsi")
+        // cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
+        //   .first()
+        //   .trigger('mouseover')
 
-      // selects the age range
-      cy.get('select[name="age"]').select('31+', { force: true })
+        // finds the element `Web & Mobile Development` in dropdown and click
+        cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
+          .contains("Web & Mobile Development")
+          // .should("be.visible")
+          .first()
+          .click({ force: true })
 
-      // selects the `Titolo di Studio`
-      cy.get('select[name="select-studio"]')
-        .select('Liceo scientifico', { force: true })
 
-      // fills the email field
-      cy.get('input[placeholder="Email"]')
-        .type("ciao@bonjour.it")
 
-      // fills the phone field
-      cy.get('input[placeholder="Telefono"]')
-        .type("1234512345")
 
-      // selects the `Come ci hai conosciuto?`
-      cy.get('select[name="select-awareness"]')
-        .select('Me ne ha parlato un amico/parente', { force: true })
+        /* INSIDE NEW PAGE: subdomain `/web-and-mobile-development` */
 
-      // selects the `Corso`
-      cy.get('input[type="search"]').type(`WEB & MOBILE DEVELOPMENT - Palermo{enter}`)
+        // waiting for the page to load (IDEA form may not be visible)
+        cy.wait(2_000)
 
-      // ticks the `I read Privacy Policy` checkbox
-      cy.get('[name="acceptance-privacy"]').check({ force: true })
+        // fill the Fullname field
+        cy.get('input[placeholder="Nome e cognome"]')
+          .type("John Doe")
 
-      // checks if the submit button is active
-      cy.get('input[type="submit"]').should('not.be.disabled')
+        // selects the age range
+        cy.get('select[name="age"]').select('31+', { force: true })
+
+        // selects the `Titolo di Studio`
+        cy.get('select[name="select-studio"]')
+          .select('Liceo scientifico', { force: true })
+
+        // fills the email field
+        cy.get('input[placeholder="Email"]')
+          .type("ciao@bonjour.it")
+
+        // fills the phone field
+        cy.get('input[placeholder="Telefono"]')
+          .type("1234512345")
+
+        // selects the `Come ci hai conosciuto?`
+        cy.get('select[name="select-awareness"]')
+          .select('Me ne ha parlato un amico/parente', { force: true })
+
+        // selects the `Corso`
+        cy.get('input[type="search"]').type(`WEB & MOBILE DEVELOPMENT - Palermo{enter}`)
+
+        // ticks the `I read Privacy Policy` checkbox
+        cy.get('[name="acceptance-privacy"]').check({ force: true })
+
+        // checks if the submit button is active
+        cy.get('input[type="submit"]').should('not.be.disabled')
+      })
+
     })
 
 
