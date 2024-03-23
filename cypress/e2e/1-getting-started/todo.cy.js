@@ -1,11 +1,21 @@
 
 describe('example to-do app', () => {
-  beforeEach(() => {
-    cy.visit('https://www.google.com/')
-    cy.get("#L2AGLb").click()
-  })
 
   it('reachs the URI steps by step and it fills the form like a user would do', () => {
+
+    cy.visit('https://www.google.com/')
+
+    // if (cy.get("#L2AGLb").length > 0) {
+    //   console.log('cookie banner still exists')
+    //   console.log(cy.get("#L2AGLb"))
+    // }
+
+    cy.get("#L2AGLb")
+      // .should('be.visible')
+      .click({ force: true })
+
+    // To try avoid the cookie banner not visible at second try\
+    cy.clearCookies()
 
     // types in the textarea `its steve jobs academy`
     cy.get('textarea#APjFqb').type(`its steve jobs academy{enter}`)
@@ -14,18 +24,33 @@ describe('example to-do app', () => {
     cy.get('a[jsname=UWckNb]')
       .should('include.text', 'Steve Jobs Academy: Home')
       .first()
-      .click()
+      .click({ force: true })
 
-    // finds the element Corsi in navbar and trigger mouseover
-    cy.get('a[href="https://stevejobs.academy/corsi/"]').should("have.text", "Corsi")
-    cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
-      .trigger('mouseover')
+    // to navigate in a new page different from `google.com`
+    cy.origin('https://stevejobs.academy', () => {
+      // finds the element Corsi in navbar and trigger mouseover
+      cy.get('a[href="https://stevejobs.academy/corsi/"]')
+        .should("include.text", "Corsi")
+      cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
+        .trigger('mouseover')
 
-    // finds the element `Web & Mobile Development` in dropdown and click
-    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
-      .should("have.text", "Web & Mobile Development")
-      .should("be.visible")
-      .click()
+      // finds the element `Web & Mobile Development` in dropdown and click
+      cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
+        .should("have.text", "Web & Mobile Development")
+        .should("be.visible")
+        .click()
+    })
+
+    cy.origin("https://stevejobs.academy/web-and-mobile-development/", () => {
+
+      // waiting for the page to load (IDEA form may not be visible)
+      cy.wait(1000)
+
+      cy.get('input[placeholder="Nome e cognome"]')
+        .type("John Doe")
+
+    })
+
 
 
   })
