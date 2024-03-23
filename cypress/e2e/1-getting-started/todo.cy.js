@@ -29,36 +29,44 @@ describe('example to-do app', () => {
       .should('include.text', 'Steve Jobs Academy: Home')
       .first()
       .click({ force: true })
-
   })
 
   it('opens the page `Web & Mobile Development` course page ', () => {
 
     cy.visit('https://stevejobs.academy')
 
+    // waiting for the page to load (IDEA navbar may not be visible)
+    cy.wait(2000)
+
     // finds the element Corsi in navbar and trigger mouseover
-    cy.get('a[href="https://stevejobs.academy/corsi/"]')
-      .should("include.text", "Corsi")
+    cy.get('a[href="https://stevejobs.academy/corsi/"]', { timeout: 8_000 })
+      .contains("Corsi")
     cy.get('a[href="https://stevejobs.academy/corsi/"]:parent')
       .first()
       .trigger('mouseover')
 
     // finds the element `Web & Mobile Development` in dropdown and click
-    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]', { timeout: 8_000 })
+    cy.get('a[href="https://stevejobs.academy/web-and-mobile-development/"]')
       .contains("Web & Mobile Development")
       .should("be.visible")
       .first()
-      .click()
+      .click({ force: true })
 
+  })
+
+  it('fills the form on the `Web & Mobile Development` course page', () => {
+
+    cy.visit('https://stevejobs.academy/web-and-mobile-development/');
 
     // waiting for the page to load (IDEA form may not be visible)
     cy.wait(2000)
 
+    // fill the Fullname field
     cy.get('input[placeholder="Nome e cognome"]')
       .type("John Doe")
 
-
   })
+
 
 
 
