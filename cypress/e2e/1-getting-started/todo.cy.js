@@ -89,6 +89,8 @@ describe('navigate to course and fill the form, step by step',
       // selects the `Corso`
       cy.get('input[type="search"]').type(`WEB & MOBILE DEVELOPMENT - Palermo{enter}`)
 
+      // ticks the `I read Privacy Policy` checkbox
+      cy.get('[name="acceptance-privacy"]').check({ force: true })
     })
 
 
